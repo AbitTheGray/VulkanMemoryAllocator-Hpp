@@ -36,17 +36,17 @@ struct Dispatcher {}; // VMA uses function pointers from VmaAllocator instead
 class Allocator;
 
 template <class T>
-VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>
+VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>
 createUniqueHandle(const T &t) VULKAN_HPP_NOEXCEPT {
   return VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>(t);
 }
 template <class T, class O>
-VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>
+VULKAN_HPP_INLINE VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>
 createUniqueHandle(const T &t, O o) VULKAN_HPP_NOEXCEPT {
   return VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>(t, o);
 }
 template <class F, class S, class O>
-std::pair<VULKAN_HPP_NAMESPACE::UniqueHandle<F, Dispatcher>,
+VULKAN_HPP_INLINE std::pair<VULKAN_HPP_NAMESPACE::UniqueHandle<F, Dispatcher>,
           VULKAN_HPP_NAMESPACE::UniqueHandle<S, Dispatcher>>
 createUniqueHandle(const std::pair<F, S> &t, O o) VULKAN_HPP_NOEXCEPT {
   return {VULKAN_HPP_NAMESPACE::UniqueHandle<F, Dispatcher>(t.first, o),
@@ -54,7 +54,7 @@ createUniqueHandle(const std::pair<F, S> &t, O o) VULKAN_HPP_NOEXCEPT {
 }
 
 template <class T, class UniqueVectorAllocator, class VectorAllocator, class O>
-std::vector<VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>,
+VULKAN_HPP_INLINE std::vector<VULKAN_HPP_NAMESPACE::UniqueHandle<T, Dispatcher>,
             UniqueVectorAllocator>
 createUniqueHandleVector(const std::vector<T, VectorAllocator> &vector, O o,
                          const UniqueVectorAllocator &vectorAllocator)
@@ -81,7 +81,7 @@ protected:
 };
 template <class T> class Deleter<T, void> {
 protected:
-  void destroy(const T &t) VULKAN_HPP_NOEXCEPT { t.destroy(); }
+  VULKAN_HPP_INLINE void destroy(const T &t) VULKAN_HPP_NOEXCEPT { t.destroy(); }
 };
 } // namespace VMA_HPP_NAMESPACE
 namespace VULKAN_HPP_NAMESPACE {
@@ -227,7 +227,7 @@ createResultValueType(VULKAN_HPP_NAMESPACE::Result result, T &&data) {
 } // namespace VMA_HPP_NAMESPACE::detail
 
 namespace VMA_HPP_NAMESPACE::detail {
-void resultCheck(VULKAN_HPP_NAMESPACE::Result result, char const *message) {
+VULKAN_HPP_INLINE void resultCheck(VULKAN_HPP_NAMESPACE::Result result, char const *message) {
 #ifdef VULKAN_HPP_NO_EXCEPTIONS
   VMA_HPP_NAMESPACE::detail::ignore(
       result); // just in case VULKAN_HPP_ASSERT_ON_RESULT is empty
@@ -291,7 +291,7 @@ VMA_HPP_DESTROY_IMPL(VirtualAllocation) { owner.virtualFree(t); }
 #endif
 
 template <class InstanceDispatcher, class DeviceDispatcher>
-VULKAN_HPP_CONSTEXPR VulkanFunctions
+VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR VulkanFunctions
 functionsFromDispatcher(InstanceDispatcher const *instance,
                         DeviceDispatcher const *device) VULKAN_HPP_NOEXCEPT {
   return VulkanFunctions{
@@ -337,7 +337,7 @@ functionsFromDispatcher(InstanceDispatcher const *instance,
 }
 
 template <class Dispatch = VULKAN_HPP_DEFAULT_DISPATCHER_TYPE>
-VULKAN_HPP_CONSTEXPR VulkanFunctions
+VULKAN_HPP_INLINE VULKAN_HPP_CONSTEXPR VulkanFunctions
 functionsFromDispatcher(Dispatch const &dispatch) VULKAN_HPP_NOEXCEPT {
   return functionsFromDispatcher(&dispatch, &dispatch);
 }
