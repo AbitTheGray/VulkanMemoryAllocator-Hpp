@@ -53,11 +53,11 @@ namespace VMA_HPP_NAMESPACE
                 m_pool = nullptr;
             }
 
-            // No move
+            // No copy
             Pool(Pool&) = delete;
             Pool& operator=(Pool&) = delete;
 
-            // Default copy
+            // Default move
             Pool(Pool&&) = default;
             Pool& operator=(Pool&&) = default;
 
@@ -139,11 +139,11 @@ namespace VMA_HPP_NAMESPACE
                 m_allocation = nullptr;
             }
 
-            // No move
+            // No copy
             Allocation(Allocation&) = delete;
             Allocation& operator=(Allocation&) = delete;
 
-            // Default copy
+            // Default move
             Allocation(Allocation&&) = default;
             Allocation& operator=(Allocation&&) = default;
 
@@ -336,11 +336,11 @@ namespace VMA_HPP_NAMESPACE
                 m_str = nullptr;
             }
 
-            // No move
+            // No copy
             StatsString(StatsString&) = delete;
             StatsString& operator=(StatsString&) = delete;
 
-            // Default copy
+            // Default move
             StatsString(StatsString&&) = default;
             StatsString& operator=(StatsString&&) = default;
 
@@ -435,11 +435,11 @@ namespace VMA_HPP_NAMESPACE
                 m_allocation = nullptr;
             }
 
-            // No move
+            // No copy
             AllocatedBuffer(AllocatedBuffer&) = delete;
             AllocatedBuffer& operator=(AllocatedBuffer&) = delete;
 
-            // Default copy
+            // Default move
             AllocatedBuffer(AllocatedBuffer&&) = default;
             AllocatedBuffer& operator=(AllocatedBuffer&&) = default;
 
@@ -595,11 +595,11 @@ namespace VMA_HPP_NAMESPACE
                 m_allocation = nullptr;
             }
 
-            // No move
+            // No copy
             AllocatedImage(AllocatedImage&) = delete;
             AllocatedImage& operator=(AllocatedImage&) = delete;
 
-            // Default copy
+            // Default move
             AllocatedImage(AllocatedImage&&) = default;
             AllocatedImage& operator=(AllocatedImage&&) = default;
 
@@ -757,11 +757,11 @@ namespace VMA_HPP_NAMESPACE
                 m_context = nullptr;
             }
 
-            // No move
+            // No copy
             Defragmentation(Defragmentation&) = delete;
             Defragmentation& operator=(Defragmentation&) = delete;
 
-            // Default copy
+            // Default move
             Defragmentation(Defragmentation&&) = default;
             Defragmentation& operator=(Defragmentation&&) = default;
 
@@ -805,11 +805,11 @@ namespace VMA_HPP_NAMESPACE
                 m_allocator = nullptr;
             }
 
-            // No move
+            // No copy
             Allocator(Allocator&) = delete;
             Allocator& operator=(Allocator&) = delete;
 
-            // Default copy
+            // Default move
             Allocator(Allocator&&) = default;
             Allocator& operator=(Allocator&&) = default;
 
