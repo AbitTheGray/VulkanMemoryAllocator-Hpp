@@ -33,6 +33,7 @@ namespace VMA_HPP_NAMESPACE
             VMA_HPP_NAMESPACE::Pool m_pool;
 
         public:
+            Pool() : m_allocator(nullptr), m_pool(nullptr) {}
             Pool(
                 VMA_HPP_NAMESPACE::Allocator allocator,
                 VMA_HPP_NAMESPACE::Pool pool
@@ -57,9 +58,23 @@ namespace VMA_HPP_NAMESPACE
             Pool(Pool&) = delete;
             Pool& operator=(Pool&) = delete;
 
-            // Default move
-            Pool(Pool&&) = default;
-            Pool& operator=(Pool&&) = default;
+            // Move
+            Pool(Pool&& other) noexcept : Pool()
+            {
+                swap(other);
+            }
+            Pool& operator=(Pool&& other) noexcept
+            {
+                Pool newObj{std::move(other)};
+                swap(newObj);
+                return *this;
+            }
+
+            void swap(Pool& other) noexcept
+            {
+                std::ranges::swap(m_allocator, other.m_allocator);
+                std::ranges::swap(m_pool, other.m_pool);
+            }
 
         public:
             VMA_HPP_NAMESPACE::Allocator allocator() const { return m_allocator; }
@@ -143,9 +158,23 @@ namespace VMA_HPP_NAMESPACE
             Allocation(Allocation&) = delete;
             Allocation& operator=(Allocation&) = delete;
 
-            // Default move
-            Allocation(Allocation&&) = default;
-            Allocation& operator=(Allocation&&) = default;
+            // Move
+            Allocation(Allocation&& other) noexcept : Allocation()
+            {
+                swap(other);
+            }
+            Allocation& operator=(Allocation&& other) noexcept
+            {
+                Allocation newObj{std::move(other)};
+                swap(newObj);
+                return *this;
+            }
+
+            void swap(Allocation& other) noexcept
+            {
+                std::ranges::swap(m_allocator, other.m_allocator);
+                std::ranges::swap(m_allocation, other.m_allocation);
+            }
 
         public:
             VMA_HPP_NAMESPACE::Allocator allocator() const { return m_allocator; }
@@ -340,9 +369,23 @@ namespace VMA_HPP_NAMESPACE
             StatsString(StatsString&) = delete;
             StatsString& operator=(StatsString&) = delete;
 
-            // Default move
-            StatsString(StatsString&&) = default;
-            StatsString& operator=(StatsString&&) = default;
+            // Move
+            StatsString(StatsString&& other) noexcept : StatsString()
+            {
+                swap(other);
+            }
+            StatsString& operator=(StatsString&& other) noexcept
+            {
+                StatsString newObj{std::move(other)};
+                swap(newObj);
+                return *this;
+            }
+
+            void swap(StatsString& other) noexcept
+            {
+                std::ranges::swap(m_allocator, other.m_allocator);
+                std::ranges::swap(m_str, other.m_str);
+            }
 
         public:
             VMA_HPP_NAMESPACE::Allocator allocator() const { return m_allocator; }
@@ -439,9 +482,27 @@ namespace VMA_HPP_NAMESPACE
             AllocatedBuffer(AllocatedBuffer&) = delete;
             AllocatedBuffer& operator=(AllocatedBuffer&) = delete;
 
-            // Default move
-            AllocatedBuffer(AllocatedBuffer&&) = default;
-            AllocatedBuffer& operator=(AllocatedBuffer&&) = default;
+            // Move
+            AllocatedBuffer(AllocatedBuffer&& other) noexcept : AllocatedBuffer()
+            {
+                swap(other);
+            }
+            AllocatedBuffer& operator=(AllocatedBuffer&& other) noexcept
+            {
+                AllocatedBuffer newObj{std::move(other)};
+                swap(newObj);
+                return *this;
+            }
+
+            void swap(AllocatedBuffer& other) noexcept
+            {
+                std::ranges::swap(m_dispatcher, other.m_dispatcher);
+                std::ranges::swap(m_device, other.m_device);
+
+                std::ranges::swap(m_allocator, other.m_allocator);
+                std::ranges::swap(m_buffer, other.m_buffer);
+                std::ranges::swap(m_allocation, other.m_allocation);
+            }
 
         public:
             operator VkBuffer() const { return m_buffer; }
@@ -599,9 +660,27 @@ namespace VMA_HPP_NAMESPACE
             AllocatedImage(AllocatedImage&) = delete;
             AllocatedImage& operator=(AllocatedImage&) = delete;
 
-            // Default move
-            AllocatedImage(AllocatedImage&&) = default;
-            AllocatedImage& operator=(AllocatedImage&&) = default;
+            // Move
+            AllocatedImage(AllocatedImage&& other) noexcept : AllocatedImage()
+            {
+                swap(other);
+            }
+            AllocatedImage& operator=(AllocatedImage&& other) noexcept
+            {
+                AllocatedImage newObj{std::move(other)};
+                swap(newObj);
+                return *this;
+            }
+
+            void swap(AllocatedImage& other) noexcept
+            {
+                std::ranges::swap(m_dispatcher, other.m_dispatcher);
+                std::ranges::swap(m_device, other.m_device);
+
+                std::ranges::swap(m_allocator, other.m_allocator);
+                std::ranges::swap(m_image, other.m_image);
+                std::ranges::swap(m_allocation, other.m_allocation);
+            }
 
         public:
             operator VkImage() const { return m_image; }
@@ -761,9 +840,23 @@ namespace VMA_HPP_NAMESPACE
             Defragmentation(Defragmentation&) = delete;
             Defragmentation& operator=(Defragmentation&) = delete;
 
-            // Default move
-            Defragmentation(Defragmentation&&) = default;
-            Defragmentation& operator=(Defragmentation&&) = default;
+            // Move
+            Defragmentation(Defragmentation&& other) noexcept : Defragmentation()
+            {
+                swap(other);
+            }
+            Defragmentation& operator=(Defragmentation&& other) noexcept
+            {
+                Defragmentation newObj{std::move(other)};
+                swap(newObj);
+                return *this;
+            }
+
+            void swap(Defragmentation& other) noexcept
+            {
+                std::ranges::swap(m_allocator, other.m_allocator);
+                std::ranges::swap(m_context, other.m_context);
+            }
 
         public:
             VMA_HPP_NAMESPACE::Allocator allocator() const { return m_allocator; }
@@ -809,9 +902,22 @@ namespace VMA_HPP_NAMESPACE
             Allocator(Allocator&) = delete;
             Allocator& operator=(Allocator&) = delete;
 
-            // Default move
-            Allocator(Allocator&&) = default;
-            Allocator& operator=(Allocator&&) = default;
+            // Move
+            Allocator(Allocator&& other) noexcept : Allocator()
+            {
+                swap(other);
+            }
+            Allocator& operator=(Allocator&& other) noexcept
+            {
+                Allocator newObj{std::move(other)};
+                swap(newObj);
+                return *this;
+            }
+
+            void swap(Allocator& other) noexcept
+            {
+                std::ranges::swap(m_allocator, other.m_allocator);
+            }
 
 #if defined( VULKAN_HPP_HAS_SPACESHIP_OPERATOR )
             auto operator<=>(Allocator const &) const = default;
